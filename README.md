@@ -31,7 +31,7 @@
 
 ### Installing <a name = "installing"></a>
 
-1. Add your artifactory's credential to gradle.properties file
+1. Add your artifactory credential to `gradle.properties` file.
 
 2. Resolve all denpendencies and copy them into `Drivers` folder. 
 > Due to the way Java loading libraries, please close all Katalon Studio applications before execute the following command, and re-open it after the command has been completed.
