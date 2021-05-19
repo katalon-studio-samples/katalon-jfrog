@@ -1,0 +1,56 @@
+
+buildscript {
+    repositories {
+        // jcenter()
+    }
+
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+    }
+}
+
+plugins {
+    id 'java'
+    id "com.katalon.gradle-plugin" version "0.0.7"
+}
+
+allprojects {
+    apply plugin: "com.jfrog.artifactory"
+}
+
+dependencies {
+    // Some sample dependencies
+    compile 'javax.websocket:javax.websocket-api:1.0'
+    compile 'com.google.oauth-client:google-oauth-client:1.22.0'
+    compile 'io.rest-assured:rest-assured:3.2.0'
+    compile 'io.rest-assured:json-path:3.2.0'
+    compile 'io.rest-assured:json-schema-validator:3.2.0'
+    compile 'org.apache.httpcomponents:httpmime:4.5.1'
+    compile 'net.sf.jopt-simple:jopt-simple:5.0'
+    compile 'commons-collections:commons-collections:3.2.2'
+    compile 'com.microsoft.sqlserver:mssql-jdbc:6.2.2.jre8'
+    compile 'mysql:mysql-connector-java:8.0.15'
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'default-maven-remote'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'default-maven-remote'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
+}
